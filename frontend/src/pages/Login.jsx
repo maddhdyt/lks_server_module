@@ -3,19 +3,29 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
+    const [user, setUser] = useState({});
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     //Validation
     const [validation, setValidation] = useState([]);
 
+    const token = localStorage.getItem('token');
+
+    const fetchData = async () => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        await axios
+            .post('http://127.0.0.1:8000/api/auth/me')
+            .then((responses) => {
+                setUser(responses.data);
+            });
+    };
+
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (localStorage.getItem('token')) {
-            navigate('/home');
-        }
-    });
+        fetchData();
+    }, []);
 
     const loginHandler = async (e) => {
         e.preventDefault();
@@ -30,13 +40,22 @@ function Login() {
             .then((response) => {
                 console.log(response.data.access_token);
                 localStorage.setItem('token', response.data.access_token);
-                navigate('/home');
+                window.location.reload();
             })
             .catch((error) => {
                 console.log(error.response.data);
+
                 setValidation(error.response.data);
             });
     };
+
+    // Validate if admin or user
+    if (user.role == 1) {
+        navigate('/dashboard');
+    } else if (user.role == 0) {
+        navigate('/home');
+    }
+
     return (
         <div className="w-full min-h-screen bg-gradient-to-r from-slate-800  to-slate-500 p-4 flex items-center justify-center">
             <div className="bg-white py-6 px-10 sm:max-w-md w-full rounded-md">
@@ -48,6 +67,13 @@ function Login() {
                         <div className="border border-red-700 px-4 py-3 rounded-lg  w-full bg-red-200">
                             <small className="text-red-800">
                                 {validation.error}
+                            </small>
+                        </div>
+                    )}
+                    {validation.success && (
+                        <div className="border border-green-700 px-4 py-3 rounded-lg  w-full bg-red-200">
+                            <small className="text-green-800">
+                                {validation.success}
                             </small>
                         </div>
                     )}
