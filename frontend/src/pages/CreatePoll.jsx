@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import Container from '../components/Container';
-import Card from '../components/Card';
+import Form from '../components/Form';
 import Fab from '../components/Fab';
 
-function Dashboard() {
+function CreatePoll() {
     const [user, setUser] = useState({});
     const [openProfile, setOpenProfile] = useState(false);
 
@@ -51,13 +51,12 @@ function Dashboard() {
     return (
         <>
             <Navbar>
-                {/* <Navbar.Button onClick={logoutHandler}>Logout</Navbar.Button> */}
                 <Navbar.Title>YukPilih</Navbar.Title>
                 <div className="flex items-center gap-10">
                     <Navbar.Menu>
                         <Navbar.Item
+                            href="/dashboard"
                             text="Dashboard"
-                            className="nav-active"
                         ></Navbar.Item>
                         <Navbar.Item
                             href="/poll"
@@ -76,15 +75,33 @@ function Dashboard() {
                 </div>
             </Navbar>
             <Container>
-                <Header>Dashboard</Header>
-                <div className="grid grid-cols-3 gap-3 mt-10">
-                    <Card title="Total Polling" count="60" />
-                    <Card title="Berlangsung" count="60" />
-                    <Card title="Selesai" count="60" />
-                </div>
-                <Fab href="/create-poll" text="Create New Poll" name="plus" />
+                <Header>Create New Poll</Header>
+                <Form>
+                    <div className="flex flex-col gap-2">
+                        <Form.Item label="Title">
+                            <Form.Input></Form.Input>
+                        </Form.Item>
+                        <Form.Item label="Description">
+                            <Form.Textarea></Form.Textarea>
+                        </Form.Item>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <Form.Item label="Option 1">
+                            <Form.Input></Form.Input>
+                        </Form.Item>
+                        <Form.Item label="Option 2">
+                            <Form.Input></Form.Input>
+                        </Form.Item>
+                        <div className="flex justify-end mt-2">
+                            <button className="w-fit relative right-0 px-3 py-2 text-sm text-white rounded-md bg-blue-700 flex items-center gap-1">
+                                Add Option
+                            </button>
+                        </div>
+                    </div>
+                </Form>
+                <Fab text="Post Polling" name="send" />
             </Container>
         </>
     );
 }
-export default Dashboard;
+export default CreatePoll;

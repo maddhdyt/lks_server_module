@@ -57,7 +57,7 @@ function Login() {
     }
 
     return (
-        <div className="w-full min-h-screen bg-gradient-to-r from-slate-800  to-slate-500 p-4 flex items-center justify-center">
+        <div className="w-full min-h-screen bg-slate-100 p-4 flex items-center justify-center">
             <div className="bg-white py-6 px-10 sm:max-w-md w-full rounded-md">
                 <div className="sm:text-3xl text-2xl text-center text-slate-900 font-bold mb-8">
                     Login
@@ -112,7 +112,7 @@ function Login() {
                     <div className="flex justify-center my-6">
                         <button
                             type="submit"
-                            className="rounded-md p-3 w-full  bg-gradient-to-r from-slate-500  to-slate-800 text-white text-md font-semibold"
+                            className="rounded-md p-3 w-full  bg-gradient-to-r from-blue-800 to-blue-700 text-white text-md font-semibold"
                         >
                             Sign in
                         </button>

@@ -4,10 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import Container from '../components/Container';
-import Card from '../components/Card';
-import Fab from '../components/Fab';
+import PollCard from '../components/PollCard';
 
-function Dashboard() {
+function PollList() {
     const [user, setUser] = useState({});
     const [openProfile, setOpenProfile] = useState(false);
 
@@ -51,17 +50,17 @@ function Dashboard() {
     return (
         <>
             <Navbar>
-                {/* <Navbar.Button onClick={logoutHandler}>Logout</Navbar.Button> */}
                 <Navbar.Title>YukPilih</Navbar.Title>
                 <div className="flex items-center gap-10">
                     <Navbar.Menu>
                         <Navbar.Item
+                            href="/dashboard"
                             text="Dashboard"
-                            className="nav-active"
                         ></Navbar.Item>
                         <Navbar.Item
                             href="/poll"
                             text="Poll List"
+                            className="nav-active"
                         ></Navbar.Item>
                     </Navbar.Menu>
                     <Navbar.Control
@@ -76,15 +75,17 @@ function Dashboard() {
                 </div>
             </Navbar>
             <Container>
-                <Header>Dashboard</Header>
-                <div className="grid grid-cols-3 gap-3 mt-10">
-                    <Card title="Total Polling" count="60" />
-                    <Card title="Berlangsung" count="60" />
-                    <Card title="Selesai" count="60" />
+                <Header>Poll List</Header>
+                <div className="mt-10 grid grid-cols-2 max-sm:grid-cols-1 gap-4">
+                    <PollCard title="Polling Title 1" deadline="23-09-2023" />
+                    <PollCard title="Polling Title 2" deadline="23-09-2023" />
+                    <PollCard title="Polling Title 3" deadline="23-09-2023" />
+                    <PollCard title="Polling Title 4" deadline="23-09-2023" />
+                    <PollCard title="Polling Title 5" deadline="23-09-2023" />
+                    <PollCard title="Polling Title 6" deadline="23-09-2023" />
                 </div>
-                <Fab href="/create-poll" text="Create New Poll" name="plus" />
             </Container>
         </>
     );
 }
-export default Dashboard;
+export default PollList;

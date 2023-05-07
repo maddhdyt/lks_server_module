@@ -4,14 +4,19 @@
 
 * {
     font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
 }
 .page-container {
     @apply !w-[90%] mx-auto h-full relative;
 }
 .nav-active {
-    @apply bg-blue-800;
+    @apply bg-blue-700;
 }
 
 .nav-active a {
     @apply text-white;
+}
+
+body {
+    @apply bg-gray-50;
 }

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
 function Home() {
+    const [openProfile, setOpenProfile] = useState(false);
     const [user, setUser] = useState({});
 
     const navigate = useNavigate();
@@ -43,30 +44,30 @@ function Home() {
 
     return (
         <>
-            <Navbar />
-            <div className="w-full h-screen flex justify-center items-center">
-                <div className="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg">
-                    <div>
-                        <h2 className="text-gray-800 text-3xl font-semibold">
-                            Hello {user.name}
-                        </h2>
-                        <p className="mt-2 text-gray-600">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Quae dolores deserunt ea doloremque natus
-                            error, rerum quas odio quaerat nam ex commodi hic,
-                            suscipit in a veritatis pariatur minus consequuntur!
-                        </p>
-                    </div>
-                    <div className="flex justify-end mt-4">
-                        <button
-                            onClick={logoutHandler}
-                            className="text-xl font-medium text-red-500"
-                        >
-                            Logout
-                        </button>
-                    </div>
+            <Navbar>
+                {/* <Navbar.Button onClick={logoutHandler}>Logout</Navbar.Button> */}
+                <Navbar.Title>YukPilih</Navbar.Title>
+                <div className="flex items-center gap-10">
+                    <Navbar.Menu>
+                        <Navbar.Item
+                            text="Home"
+                            className="nav-active"
+                        ></Navbar.Item>
+                        <Navbar.Item text="Poll List"></Navbar.Item>
+                        <Navbar.Item text="Poll History"></Navbar.Item>
+                    </Navbar.Menu>
+                    <Navbar.Control
+                        onClick={() => setOpenProfile((prev) => !prev)}
+                    >
+                        {openProfile && (
+                            <Navbar.Dropdown
+                                onClick={logoutHandler}
+                            ></Navbar.Dropdown>
+                        )}
+                    </Navbar.Control>
                 </div>
-            </div>
+            </Navbar>
+            
         </>
     );
 }
